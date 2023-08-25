@@ -11,7 +11,7 @@ def convert_to_vbscript(vwolf_script, output_file):
             string = line.split(" ", 1)[1]
             vbscript_code += "x.SendKeys \"" + string + "\"\n"
         elif line.startswith("INIT"):
-            vbscript_code += "Set x = CreateObject(\"WScript.Shell\")\n"
+            vbscript_code += 'Set x = CreateObject(\"WScript.Shell\")\nSet k = CreateObject("Shell.Application")\n'
         elif line.startswith("START"):
             application = line.split(" ")[1]
             vbscript_code += "x.run " + application + "\n"
@@ -19,6 +19,14 @@ def convert_to_vbscript(vwolf_script, output_file):
             url = line.split(" ")[1]
             outfile = line.split(" ")[2]
             vbscript_code += f'x.run "powershell"\nwscript.sleep 2000\nx.sendkeys "Invoke-WebRequest {url} -OutFile {outfile} {ENTER}"'
+        elif line.startswith("RUN-DIALOG"):
+            vbscript_code += "k.FileRun\n"
+        elif line.startswith("MSGBOX"):
+            title = line.split(" ")[1]
+            content = line.split(" ")[2]
+            vbscript_code += f"z=msgbox({content} ,0, {title})\n"
+
+
         # Add more conditions for other VWolfScript commands
 
     with open(output_file, "w") as file:
