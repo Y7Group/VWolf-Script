@@ -12,6 +12,11 @@ Example - START "cmd"
 DOWNLOAD-FILE - Downloads file from specified url
 Example - DOWNLOAD-FILE <URL> <OUT FILE>
 
+RUN-DIALOG - Opens the windows run dialog
+Example - RUN-DIALOG
+
+MSGBOX - Makes a message boc popup
+Example - MSGBOX "Title" "Text"
 Key	Argument
 BACKSPACE	{BACKSPACE}, {BS}, or {BKSP}
 BREAK	{BREAK}
